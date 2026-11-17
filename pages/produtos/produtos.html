@@ -1,9 +1,111 @@
-<section class="module-page" data-page-title="Produtos">
-    <p class="eyebrow">Catálogo e estoque</p>
-    <h1>Produtos</h1>
-    <p class="module-description">Gerencie os produtos, preços e quantidades disponíveis.</p>
-    <section class="panel module-placeholder">
-        <h2>Cadastro de produtos</h2>
-        <p>Esta página está pronta para receber a lista de produtos, a busca e o formulário de cadastro.</p>
-    </section>
+<section class="module-page product-page" data-page-title="Cadastro de produto">
+    <div class="product-heading">
+        <div>
+            <p class="eyebrow">Estoque / Novo produto</p>
+            <h1>Cadastro de produto</h1>
+            <p class="module-description">Adicione um novo item ao catálogo da sua loja.</p>
+        </div>
+        <div class="product-heading-actions">
+            <a class="button button-secondary" href="#dashboard" data-route="dashboard">Cancelar</a>
+            <button class="button product-save-button" type="button" data-message="O formulário está pronto para ser conectado ao PHP.">
+                <span aria-hidden="true">✓</span> Salvar produto
+            </button>
+        </div>
+    </div>
+
+    <div class="product-subheading">
+        <a class="product-back-link" href="#" data-message="A listagem de estoque será adicionada em uma próxima etapa."><span aria-hidden="true">←</span> Voltar para estoque</a>
+        <p class="product-save-state"><span aria-hidden="true">●</span> Prévia do cadastro <span class="required-note">* Campos obrigatórios</span></p>
+    </div>
+
+    <form class="product-form" id="product-form" autocomplete="off">
+        <div class="product-main-column">
+            <section class="panel product-card" aria-labelledby="product-general-title">
+                <div class="product-card-heading">
+                    <h2 id="product-general-title">Informações gerais</h2>
+                    <p>Identifique o produto e organize as informações principais.</p>
+                </div>
+                <div class="product-fields">
+                    <label class="product-field product-field-full" for="product-name">
+                        <span>Nome do produto <b>*</b></span>
+                        <input id="product-name" name="nome" type="text" maxlength="120" placeholder="Ex.: Vaso cerâmico Horizonte" required>
+                    </label>
+                    <label class="product-field product-field-full" for="product-description">
+                        <span>Descrição</span>
+                        <textarea id="product-description" name="descricao" maxlength="255" rows="3" placeholder="Descreva as características do produto"></textarea>
+                        <small>Até 255 caracteres.</small>
+                    </label>
+                </div>
+            </section>
+
+            <section class="panel product-card" aria-labelledby="product-price-title">
+                <div class="product-card-heading">
+                    <h2 id="product-price-title">Informações comerciais</h2>
+                    <p>Defina o preço do produto.</p>
+                </div>
+                <div class="product-fields product-fields-single">
+                    <label class="product-field" for="product-price">
+                        <span>Preço <b>*</b></span>
+                        <span class="currency-input"><span>R$</span><input id="product-price" name="preco" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00" required></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="panel product-card" aria-labelledby="product-stock-title">
+                <div class="product-card-heading">
+                    <h2 id="product-stock-title">Controle de estoque</h2>
+                    <p>Informe a quantidade inicial e o limite para alerta de reposição.</p>
+                </div>
+                <div class="product-fields">
+                    <label class="product-field" for="product-quantity">
+                        <span>Estoque inicial <b>*</b></span>
+                        <input id="product-quantity" name="quantidade" type="number" min="0" step="1" value="0" required>
+                    </label>
+                    <label class="product-field" for="product-minimum">
+                        <span>Estoque mínimo <b>*</b></span>
+                        <input id="product-minimum" name="estoque_minimo" type="number" min="0" step="1" value="0" required>
+                    </label>
+                </div>
+            </section>
+        </div>
+
+        <aside class="product-side-column" aria-label="Resumo do produto">
+            <section class="panel product-card product-summary-card">
+                <div class="product-card-heading">
+                    <h2>Resumo do cadastro</h2>
+                    <p>Confira os dados que serão salvos.</p>
+                </div>
+                <div class="product-preview-mark" aria-hidden="true"><span>◇</span></div>
+                <dl class="product-summary-list">
+                    <div><dt>Produto</dt><dd id="summary-name">—</dd></div>
+                    <div><dt>Preço</dt><dd id="summary-price">R$ 0,00</dd></div>
+                    <div><dt>Estoque inicial</dt><dd><span id="summary-quantity">0</span> unidades</dd></div>
+                    <div><dt>Estoque mínimo</dt><dd><span id="summary-minimum">0</span> unidades</dd></div>
+                    <div class="summary-total"><dt>Valor estimado em estoque</dt><dd id="summary-total">R$ 0,00</dd></div>
+                </dl>
+            </section>
+
+            <section class="panel product-card product-stock-status-card">
+                <div class="product-card-heading">
+                    <h2>Situação do estoque</h2>
+                    <p>O alerta é calculado pelo estoque mínimo informado.</p>
+                </div>
+                <div class="stock-status" id="stock-status" data-status="ok">
+                    <span class="stock-status-icon" aria-hidden="true">✓</span>
+                    <span><strong id="stock-status-title">Estoque adequado</strong><small id="stock-status-description">Quantidade acima do mínimo.</small></span>
+                </div>
+                <p class="product-note"><span aria-hidden="true">ⓘ</span> O estoque inicial e o mínimo correspondem aos campos da tabela de produtos.</p>
+            </section>
+        </aside>
+    </form>
+
+    <footer class="product-footer">
+        <p><span aria-hidden="true">♧</span> Confira os dados antes de salvar o produto.</p>
+        <div class="product-heading-actions">
+            <a class="button button-secondary" href="#dashboard" data-route="dashboard">Cancelar</a>
+            <button class="button product-save-button" type="button" data-message="O formulário está pronto para ser conectado ao PHP.">
+                <span aria-hidden="true">✓</span> Salvar produto
+            </button>
+        </div>
+    </footer>
 </section>

@@ -11,6 +11,39 @@ function showToast(message) {
 
 window.showToast = showToast;
 
+function updateProductPreview() {
+    const form = document.querySelector("#product-form");
+    if (!form) return;
+
+    const name = form.elements.namedItem("nome").value.trim();
+    const price = Number(form.elements.namedItem("preco").value) || 0;
+    const quantity = Number.parseInt(form.elements.namedItem("quantidade").value, 10) || 0;
+    const minimum = Number.parseInt(form.elements.namedItem("estoque_minimo").value, 10) || 0;
+    const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+    document.querySelector("#summary-name").textContent = name || "—";
+    document.querySelector("#summary-price").textContent = currency.format(price);
+    document.querySelector("#summary-quantity").textContent = String(quantity);
+    document.querySelector("#summary-minimum").textContent = String(minimum);
+    document.querySelector("#summary-total").textContent = currency.format(price * quantity);
+
+    const lowStock = quantity <= minimum;
+    const status = document.querySelector("#stock-status");
+    status.dataset.status = lowStock ? "low" : "ok";
+    document.querySelector("#stock-status-title").textContent = lowStock ? "Estoque no limite" : "Estoque adequado";
+    document.querySelector("#stock-status-description").textContent = lowStock
+        ? "A quantidade está no mínimo ou abaixo dele."
+        : "Quantidade acima do mínimo informado.";
+    status.querySelector(".stock-status-icon").textContent = lowStock ? "!" : "✓";
+}
+
+window.addEventListener("erp:page-loaded", (event) => {
+    if (event.detail.route !== "produtos") return;
+    const form = document.querySelector("#product-form");
+    form?.addEventListener("input", updateProductPreview);
+    updateProductPreview();
+});
+
 document.addEventListener("keydown", (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();

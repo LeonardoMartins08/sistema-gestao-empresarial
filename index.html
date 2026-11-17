@@ -8,15 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="boot.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/products.css">
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/router.js" defer></script>
 </head>
 <body>
     <div class="app-shell">
         <aside class="sidebar" id="sidebar">
             <a class="brand" href="index.html" aria-label="Lume, página inicial">
                 <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></span>
-                <span>lume</span>
+                <span>ERP</span>
             </a>
 
             <button class="store-switcher" type="button" aria-expanded="false" aria-controls="store-menu">
@@ -28,10 +32,10 @@
 
             <p class="nav-caption">Gerenciamento</p>
             <nav class="primary-nav" aria-label="Navegação principal">
-                <a class="nav-item is-active" href="index.html" aria-current="page"><span class="nav-icon">▦</span>Dashboard</a>
-                <a class="nav-item" href="pages/estoque.html"><span class="nav-icon">⬡</span>Estoque <span class="nav-count">16</span></a>
-                <a class="nav-item" href="pages/faturamento.html"><span class="nav-icon">⌁</span>Faturamento</a>
-                <a class="nav-item" href="pages/precos.html"><span class="nav-icon">◇</span>Preços</a>
+                <a class="nav-item is-active" href="#dashboard" data-route="dashboard" aria-current="page"><span class="nav-icon">▦</span>Dashboard</a>
+                <a class="nav-item" href="#produtos" data-route="produtos"><span class="nav-icon">⬡</span>Estoque <span class="nav-count">16</span></a>
+                <a class="nav-item" href="#financeiro" data-route="financeiro"><span class="nav-icon">⌁</span>Faturamento</a>
+                <a class="nav-item" href="#" data-message="A tela de preços será implementada depois."><span class="nav-icon">◇</span>Preços</a>
             </nav>
 
             <div class="sidebar-spacer"></div>
@@ -42,7 +46,7 @@
             <a class="nav-item settings-link" href="pages/configuracoes.html"><span class="nav-icon">⚙</span>Configurações</a>
             <div class="profile">
                 <span class="profile-avatar">AM</span>
-                <span><strong>Ana Martins</strong><small>Administradora</small></span>
+                <span><strong>Usuário</strong><small>Administrador</small></span>
                 <button class="icon-button logout-button" type="button" aria-label="Sair da conta" title="Sair da conta">↪</button>
             </div>
         </aside>
@@ -50,7 +54,7 @@
         <main class="main-area">
             <header class="topbar">
                 <button class="mobile-menu icon-button" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
-                <div class="breadcrumbs"><span class="home-icon" aria-hidden="true">⌂</span><span class="crumb-divider">/</span><strong>Visão geral</strong></div>
+                <div class="breadcrumbs"><span class="home-icon" aria-hidden="true">⌂</span><span class="crumb-divider">/</span><strong id="breadcrumb-title">Visão geral</strong></div>
                 <div class="topbar-tools">
                     <label class="search-box"><span aria-hidden="true">⌕</span><input id="global-search" type="search" placeholder="Buscar na loja..." aria-label="Buscar na loja"><kbd>⌘ K</kbd></label>
                     <button class="icon-button notification-button" type="button" aria-label="Notificações" title="Notificações">♧<i></i></button>
@@ -58,9 +62,9 @@
                 </div>
             </header>
 
-            <div class="dashboard-content">
+            <div class="dashboard-content" id="page-view">
                 <section class="welcome-row" aria-labelledby="welcome-title">
-                    <div><p class="eyebrow">Quinta-feira, 29 de outubro</p><h1 id="welcome-title">Bom dia, Ana <span aria-hidden="true">👋</span></h1><p class="welcome-subtitle">Aqui está o resumo da sua loja. Vamos fazer um ótimo dia?</p></div>
+                    <div><p class="eyebrow">Quinta-feira, 29 de outubro</p><h1 id="welcome-title">Bom dia<span aria-hidden="true">👋</span></h1><p class="welcome-subtitle">Aqui está o resumo da sua loja. Vamos fazer um ótimo dia?</p></div>
                     <div class="welcome-actions"><button class="button button-secondary date-button" type="button"><span aria-hidden="true">▣</span>01–29 out. 2026</button><button class="button button-secondary export-button" type="button"><span aria-hidden="true">⇩</span>Exportar resumo</button></div>
                 </section>
 
