@@ -1,9 +1,85 @@
-<section class="module-page" data-page-title="Financeiro">
-    <p class="eyebrow">Entradas e saídas</p>
-    <h1>Financeiro</h1>
-    <p class="module-description">Acompanhe o faturamento e os resultados da loja.</p>
-    <section class="panel module-placeholder">
-        <h2>Movimentações financeiras</h2>
-        <p>Esta página está pronta para receber o resumo financeiro e a lista de movimentações.</p>
+<section class="module-page finance-page" data-page-title="Faturamento">
+    <header class="finance-heading">
+        <div>
+            <p class="eyebrow">Entradas e resultados</p>
+            <h1>Faturamento</h1>
+            <p class="module-description">Acompanhe as vendas e os resultados da sua loja.</p>
+        </div>
+        <div class="finance-actions">
+            <label class="finance-period"><span aria-hidden="true">▣</span><span class="visually-hidden">Período</span>
+                <input type="date" name="data_inicio" aria-label="Data inicial">
+                <span class="period-separator">até</span>
+                <input type="date" name="data_fim" aria-label="Data final">
+            </label>
+            <button class="button finance-register-button" type="button" data-message="O cadastro de vendas será conectado ao PHP em uma próxima etapa.">
+                <span aria-hidden="true">＋</span> Registrar venda
+            </button>
+        </div>
+    </header>
+
+    <section class="finance-metrics" aria-label="Resumo do faturamento">
+        <article class="metric-card finance-metric-card">
+            <div class="metric-label">Faturamento bruto <span class="metric-icon" aria-hidden="true">▣</span></div>
+            <strong class="metric-value">—</strong>
+            <p class="metric-trend">Aguardando vendas registradas</p>
+        </article>
+        <article class="metric-card finance-metric-card">
+            <div class="metric-label">Vendas realizadas <span class="metric-icon" aria-hidden="true">▤</span></div>
+            <strong class="metric-value">—</strong>
+            <p class="metric-trend">Quantidade no período</p>
+        </article>
+        <article class="metric-card finance-metric-card">
+            <div class="metric-label">Ticket médio <span class="metric-icon" aria-hidden="true">◇</span></div>
+            <strong class="metric-value">—</strong>
+            <p class="metric-trend">Calculado a partir das vendas</p>
+        </article>
     </section>
+
+    <section class="finance-insights" aria-label="Análises do faturamento">
+        <article class="panel finance-chart-panel">
+            <div class="finance-panel-heading">
+                <div><h2>Receita ao longo do período</h2><p>Visualize a evolução das vendas registradas.</p></div>
+                <span class="finance-period-label">Período selecionado</span>
+            </div>
+            <div class="finance-chart-empty" role="img" aria-label="Gráfico de faturamento aguardando dados de vendas">
+                <div class="chart-y-axis"><span>R$ —</span><span>R$ —</span><span>R$ —</span><span>R$ —</span></div>
+                <div class="chart-grid"><span>01</span><span>10</span><span>20</span><span>30</span>
+                    <div class="chart-empty-message"><span class="chart-empty-icon" aria-hidden="true">⌁</span><strong>Sem dados para exibir</strong><small>O gráfico será preenchido quando houver vendas no período.</small></div>
+                </div>
+            </div>
+        </article>
+
+        <article class="panel finance-payment-panel">
+            <div class="finance-panel-heading">
+                <div><h2>Formas de pagamento</h2><p>Participação no faturamento bruto</p></div>
+            </div>
+            <div class="payment-empty">
+                <span aria-hidden="true">▤</span>
+                <strong>Sem pagamentos registrados</strong>
+                <small>Os totais por forma de pagamento aparecerão aqui.</small>
+            </div>
+        </article>
+    </section>
+
+    <section class="panel finance-history" aria-labelledby="finance-history-title">
+        <div class="finance-history-heading">
+            <div><h2 id="finance-history-title">Histórico de vendas</h2><p>Consulte as vendas registradas no período.</p></div>
+            <button class="finance-export-link" type="button" data-message="A exportação ficará disponível quando houver dados de vendas.">Exportar relatório <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="finance-history-tools">
+            <label class="finance-search"><span aria-hidden="true">⌕</span><input type="search" name="busca_venda" placeholder="Buscar venda ou cliente..." aria-label="Buscar venda ou cliente"></label>
+            <label class="finance-filter"><span class="visually-hidden">Situação da venda</span>
+                <select name="situacao"><option value="">Todas as situações</option><option value="concluida">Concluída</option><option value="cancelada">Cancelada</option></select>
+            </label>
+        </div>
+        <div class="finance-table-scroll">
+            <table class="finance-table">
+                <thead><tr><th>Venda / data</th><th>Cliente</th><th>Pagamento</th><th>Total</th><th>Situação</th></tr></thead>
+                <tbody><tr><td colspan="5"><div class="sales-empty"><span aria-hidden="true">▤</span><strong>Nenhuma venda registrada</strong><small>Quando as vendas forem cadastradas, elas aparecerão neste histórico.</small></div></td></tr></tbody>
+            </table>
+        </div>
+        <div class="finance-history-footer"><span>O histórico será carregado a partir das vendas salvas no sistema.</span></div>
+    </section>
+
+    <footer class="finance-footer"><span aria-hidden="true">ⓘ</span> Os indicadores serão calculados com base nas vendas registradas no sistema.</footer>
 </section>

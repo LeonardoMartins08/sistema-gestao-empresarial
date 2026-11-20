@@ -2,7 +2,7 @@ const routes = {
     dashboard: { file: "pages/dashboard/dashboard.html", title: "Visão geral" },
     clientes: { file: "pages/clientes/clientes.html", title: "Clientes" },
     produtos: { file: "pages/produtos/produtos.html", title: "Cadastro de produto" },
-    financeiro: { file: "pages/financeiro/financeiro.html", title: "Financeiro" },
+    financeiro: { file: "pages/financeiro/financeiro.html", title: "Faturamento" },
 };
 
 let navigationId = 0;
