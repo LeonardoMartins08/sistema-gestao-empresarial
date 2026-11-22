@@ -5,6 +5,7 @@ from pathlib import Path
 import secrets
 import sqlite3
 from decimal import Decimal, InvalidOperation
+from datetime import date
 
 from flask import (
     Flask,
@@ -50,6 +51,26 @@ def create_app():
         if not expected or not submitted or not hmac.compare_digest(expected, submitted):
             abort(400, description="Formulário expirado. Atualize a página e tente novamente.")
 
+    def get_dashboard_data():
+        connection = db.get_db()
+        dashboard = connection.execute(
+            """SELECT COUNT(*) AS product_count,
+                      COALESCE(SUM(quantidade), 0) AS stock_units,
+                      COALESCE(SUM(preco * quantidade), 0) AS inventory_value,
+                      COALESCE(SUM(CASE WHEN quantidade > 0
+                                        AND quantidade <= estoque_minimo THEN 1 ELSE 0 END), 0) AS low_stock,
+                      COALESCE(SUM(CASE WHEN quantidade = 0 THEN 1 ELSE 0 END), 0) AS out_of_stock
+               FROM produtos"""
+        ).fetchone()
+        attention_products = connection.execute(
+            """SELECT id, nome, quantidade, estoque_minimo
+               FROM produtos
+               WHERE quantidade <= estoque_minimo
+               ORDER BY quantidade ASC, nome COLLATE NOCASE
+               LIMIT 5"""
+        ).fetchall()
+        return {"dashboard": dashboard, "attention_products": attention_products}
+
     @app.context_processor
     def inject_csrf_token():
         return {"csrf_token": csrf_value()}
@@ -58,7 +79,11 @@ def create_app():
     def index():
         if not session.get("user_id"):
             return redirect(url_for("login"))
-        return render_template("index.html")
+        return render_template(
+            "index.html",
+            **get_dashboard_data(),
+            today=date.today(),
+        )
 
     @app.get("/index.html")
     def old_index_redirect():
@@ -182,6 +207,8 @@ def create_app():
     def page_fragment(filename):
         if not session.get("user_id"):
             abort(401)
+        if filename == "dashboard/dashboard.html":
+            return render_template("dashboard.html", **get_dashboard_data())
         if filename == "produtos/produtos.html":
             products = db.get_db().execute(
                 """SELECT id, nome, descricao, preco, quantidade, estoque_minimo

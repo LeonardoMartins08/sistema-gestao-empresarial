@@ -49,38 +49,13 @@ window.addEventListener("erp:page-loaded", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        document.querySelector("#global-search")?.focus();
-    }
     if (event.key === "Escape") closeMobileMenu();
-});
-
-document.querySelector("#global-search")?.addEventListener("input", (event) => {
-    const query = event.target.value.trim().toLocaleLowerCase("pt-BR");
-    const rows = [...document.querySelectorAll("#sales-table-body tr")];
-    const emptySearch = document.querySelector(".empty-search");
-    if (!rows.length) return;
-
-    let visibleRows = 0;
-    rows.forEach((row) => {
-        const matches = row.textContent.toLocaleLowerCase("pt-BR").includes(query);
-        row.hidden = !matches;
-        if (matches) visibleRows += 1;
-    });
-    if (emptySearch) emptySearch.hidden = visibleRows !== 0;
 });
 
 document.addEventListener("click", (event) => {
     const exportButton = event.target.closest(".export-button");
     if (exportButton) exportSummary();
 
-    if (event.target.closest(".date-button")) {
-        showToast("Período exibido: 01 a 29 de outubro de 2026.");
-    }
-    if (event.target.closest(".notification-button")) {
-        showToast("Você tem 3 pontos da operação para acompanhar.");
-    }
     const messageButton = event.target.closest("[data-message]");
     if (messageButton) showToast(messageButton.dataset.message);
 
@@ -126,7 +101,7 @@ function exportSummary() {
     const url = URL.createObjectURL(file);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "resumo-lume-outubro-2026.csv";
+    link.download = "resumo-dashboard-erp.csv";
     document.body.append(link);
     link.click();
     link.remove();

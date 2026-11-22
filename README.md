@@ -129,5 +129,7 @@ O comando `init-db` cria as tabelas `usuarios` e `produtos` se ainda não existi
 
 Na tela **Estoque**, o formulário de produto envia os dados para `POST /produtos/novo`. O Flask valida os campos e grava o produto com uma consulta parametrizada no SQLite. A lista abaixo do formulário consulta os produtos salvos e sinaliza quando a quantidade está no limite mínimo ou abaixo dele. Campos da tela correspondem à tabela `produtos`: nome, descrição, preço, quantidade e estoque mínimo.
 
+No dashboard, os indicadores de produtos, unidades, valor estimado em estoque e necessidade de reposição são calculados a partir da tabela `produtos`. Os painéis de vendas e atividade recente exibem estados vazios até que existam tabelas e funcionalidades para registrar esses dados.
+
 `database/Estrutura.sql` e `database/Usuarios.sql` são scripts da versão anterior com MySQL e não são usados pelo Flask. O esquema ativo é `database/schema_sqlite.sql`; o banco é o arquivo local `instance/erp.sqlite3`.
 

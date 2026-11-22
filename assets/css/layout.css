@@ -351,6 +351,51 @@
     grid-template-columns:repeat(3,minmax(0,1fr));
     gap:9px}
 
+.quick-grid-two{
+    grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.dashboard-empty-state{
+    display:flex;
+    min-height:145px;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:18px;
+    color:#68758a;
+    text-align:center}
+
+.dashboard-empty-state>span{
+    display:grid;
+    width:32px;
+    height:32px;
+    place-items:center;
+    border-radius:9px;
+    background:#edf3ff;
+    color:var(--blue);
+    font-size:16px}
+
+.dashboard-empty-state strong{
+    color:#38465a;
+    font-size:9px;
+    font-weight:600}
+
+.dashboard-empty-state p{
+    max-width:390px;
+    margin:0;
+    color:#8995a7;
+    font-size:8px;
+    line-height:1.6}
+
+.dashboard-empty-state.compact{
+    min-height:90px;
+    align-items:flex-start;
+    padding:12px 0;
+    text-align:left}
+
+.alert-list .dashboard-empty-state.compact{
+    padding:12px}
+
 .recent-panel{
     margin-top:12px;
     padding:0;
