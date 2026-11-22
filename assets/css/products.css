@@ -369,6 +369,21 @@
     color: #71809a;
 }
 
+.product-list-panel { margin-top: 24px; padding: 22px; }
+.product-list-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; }
+.product-list-heading h2 { margin: 0; font-size: 17px; }
+.product-list-heading p, .product-list-table td small { display: block; margin: 5px 0 0; color: #778197; font-size: 12px; }
+.product-list-count { flex: none; color: #647087; font-size: 12px; }
+.product-list-scroll { overflow-x: auto; }
+.product-list-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.product-list-table th, .product-list-table td { padding: 12px 10px; border-bottom: 1px solid #edf0f5; white-space: nowrap; }
+.product-list-table th { color: #778197; font-size: 11px; font-weight: 600; }
+.product-stock-badge { display: inline-block; padding: 5px 9px; border-radius: 999px; font-size: 11px; }
+.product-stock-badge.ok { color: #18845b; background: #e8f7f0; }
+.product-stock-badge.low { color: #aa6c00; background: #fff4dc; }
+.product-list-empty { display: grid; gap: 5px; padding: 22px 8px; text-align: center; white-space: normal; }
+.product-list-empty small { color: #778197; }
+
 @media (max-width: 900px) {
     .product-page {
         padding-right: 20px;

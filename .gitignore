@@ -201,6 +201,13 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Python / Flask local environment and SQLite database
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+instance/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/

@@ -198,6 +198,13 @@
 .logout-button{
     margin-left:auto}
 
+.logout-form{
+    display:flex;
+    margin:0 0 0 auto}
+
+.logout-form .logout-button{
+    margin-left:0}
+
 .main-area{
     min-height:100vh;
     margin-left:clamp(125px,16.1vw,248px)}

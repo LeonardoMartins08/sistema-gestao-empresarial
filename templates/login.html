@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Entrar | ERP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="auth-body">
+    <main class="auth-shell">
+        <section class="auth-visual" aria-label="Apresentação do ERP">
+            <a class="auth-brand" href="{{ url_for('login') }}" aria-label="ERP, início">
+                <span class="auth-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"></rect><path d="M8 8h8M8 12h8M8 16h4"></path></svg></span>
+                <span>ERP</span>
+            </a>
+            <div class="auth-visual-copy">
+                <p class="auth-eyebrow">GESTÃO MAIS SIMPLES</p>
+                <h1>Sua loja,<br>em boas mãos.</h1>
+                <p>Organize produtos, estoque e faturamento em um só lugar.</p>
+            </div>
+            <div class="auth-orbit auth-orbit-one" aria-hidden="true"></div>
+            <div class="auth-orbit auth-orbit-two" aria-hidden="true"></div>
+            <div class="auth-visual-card" aria-hidden="true">
+                <span class="visual-card-icon">▦</span>
+                <span><strong>Visão clara do negócio</strong><small>Informações organizadas para o seu dia.</small></span>
+            </div>
+            <p class="auth-visual-footer">Organização para cuidar do que faz sua loja crescer.</p>
+        </section>
+
+        <section class="auth-form-panel" aria-labelledby="login-title">
+            <div class="auth-form-content">
+                <div class="auth-mobile-brand auth-brand">
+                    <span class="auth-brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"></rect><path d="M8 8h8M8 12h8M8 16h4"></path></svg></span>
+                    <span>ERP</span>
+                </div>
+                <div class="auth-heading-icon" aria-hidden="true">↗</div>
+                <p class="auth-form-eyebrow">BEM-VINDO DE VOLTA</p>
+                <h2 id="login-title">Acesse sua conta</h2>
+                <p class="auth-intro">Entre com seus dados para continuar.</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}
+                        <p class="auth-message {{ category }}" role="status">{{ message }}</p>
+                    {% endfor %}
+                {% endwith %}
+
+                <form class="auth-form" action="{{ url_for('login') }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" maxlength="190" placeholder="voce@empresa.com" autocomplete="username" required>
+
+                    <label for="senha">Senha</label>
+                    <input id="senha" name="senha" type="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+
+                    <button class="auth-submit" type="submit">Entrar na minha conta <span aria-hidden="true">→</span></button>
+                </form>
+
+                <p class="auth-switch">Ainda não tem uma conta? <a href="{{ url_for('cadastro') }}">Criar conta</a></p>
+                <p class="auth-security"><span aria-hidden="true">♧</span> Suas credenciais são protegidas.</p>
+            </div>
+            <footer class="auth-footer"><span>ERP</span><span>Gestão da sua loja</span></footer>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL COLLATE NOCASE UNIQUE,
+    senha_hash TEXT NOT NULL,
+    ativo INTEGER NOT NULL DEFAULT 1 CHECK (ativo IN (0, 1)),
+    criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS produtos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    descricao TEXT,
+    preco NUMERIC NOT NULL CHECK (preco >= 0),
+    quantidade INTEGER NOT NULL DEFAULT 0 CHECK (quantidade >= 0),
+    estoque_minimo INTEGER NOT NULL DEFAULT 0 CHECK (estoque_minimo >= 0),
+    criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

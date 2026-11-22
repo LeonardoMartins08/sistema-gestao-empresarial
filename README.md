@@ -41,7 +41,7 @@ A plataforma foi pensada para ser intuitiva, eficiente e escalável, podendo ser
 
 ### 🗄️ Banco de Dados
 
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?&logo=mysql&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?&logo=sqlite&logoColor=white)
 
 ## Diagrama de Sequência 
 ```mermaid
@@ -111,4 +111,23 @@ sequenceDiagram
 - Enzo Longo Bardo
 - Mateus De Freitas Martis
 - Diego Favini Giacomo
+
+## Backend Python e banco SQLite
+
+O back-end usa Flask. A biblioteca `sqlite3`, incluída no Python, cria e acessa o banco local `instance/erp.sqlite3`. O arquivo do banco é gerado na máquina e ignorado pelo Git; o esquema fica versionado em `database/schema_sqlite.sql`. Cadastro, login, logout e proteção de sessão são processados pelo Flask.
+
+Para preparar o ambiente no PowerShell, na raiz do projeto:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m flask --app app init-db
+.\.venv\Scripts\python.exe -m flask --app app run --debug
+```
+
+O comando `init-db` cria as tabelas `usuarios` e `produtos` se ainda não existirem. `http://127.0.0.1:5000/health` informa se o Flask conseguiu consultar o SQLite. Acesse `/cadastro` para criar a primeira conta e `/login` para entrar; depois do login, o Flask abre o painel em `/`.
+
+Na tela **Estoque**, o formulário de produto envia os dados para `POST /produtos/novo`. O Flask valida os campos e grava o produto com uma consulta parametrizada no SQLite. A lista abaixo do formulário consulta os produtos salvos e sinaliza quando a quantidade está no limite mínimo ou abaixo dele. Campos da tela correspondem à tabela `produtos`: nome, descrição, preço, quantidade e estoque mínimo.
+
+`database/Estrutura.sql` e `database/Usuarios.sql` são scripts da versão anterior com MySQL e não são usados pelo Flask. O esquema ativo é `database/schema_sqlite.sql`; o banco é o arquivo local `instance/erp.sqlite3`.
 

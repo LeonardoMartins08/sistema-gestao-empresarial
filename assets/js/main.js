@@ -11,6 +11,10 @@ function showToast(message) {
 
 window.showToast = showToast;
 
+document.querySelectorAll(".server-toast").forEach((toast) => {
+    window.setTimeout(() => toast.remove(), 4000);
+});
+
 function updateProductPreview() {
     const form = document.querySelector("#product-form");
     if (!form) return;
@@ -77,10 +81,6 @@ document.addEventListener("click", (event) => {
     if (event.target.closest(".notification-button")) {
         showToast("Você tem 3 pontos da operação para acompanhar.");
     }
-    if (event.target.closest(".logout-button")) {
-        showToast("A conexão de autenticação será adicionada quando o login estiver configurado.");
-    }
-
     const messageButton = event.target.closest("[data-message]");
     if (messageButton) showToast(messageButton.dataset.message);
 
